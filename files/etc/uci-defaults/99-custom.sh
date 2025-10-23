@@ -7,12 +7,142 @@ echo "Starting 99-custom.sh at $(date)" >>$LOGFILE
 # 因为本项目中 单网口模式是dhcp模式 直接就能上网并且访问web界面 避免新手每次都要修改/etc/config/network中的静态ip
 # 当你刷机运行后 都调整好了 你完全可以在web页面自行关闭 wan口防火墙的入站数据
 # 具体操作方法：网络——防火墙 在wan的入站数据 下拉选项里选择 拒绝 保存并应用即可。
-uci set firewall.@zone[1].input='ACCEPT'
+# WARN: 单网口请打开此配置!
+# uci set firewall.@zone[1].input='ACCEPT'
 
 # 设置主机名映射，解决安卓原生 TV 无法联网的问题
 uci add dhcp domain
 uci set "dhcp.@domain[-1].name=time.android.com"
 uci set "dhcp.@domain[-1].ip=203.107.6.88"
+
+#!/bin/sh
+# 配置域名重定向 开始
+uci add dhcp domain
+uci set "dhcp.@domain[-1].name=ddnsgo.tparts.com"
+uci set "dhcp.@domain[-1].ip=192.168.8.207"
+
+uci add dhcp domain
+uci set "dhcp.@domain[-1].name=gitea.tparts.com"
+uci set "dhcp.@domain[-1].ip=192.168.8.207"
+
+uci add dhcp domain
+uci set "dhcp.@domain[-1].name=nas.tparts.com"
+uci set "dhcp.@domain[-1].ip=192.168.8.207"
+
+uci add dhcp domain
+uci set "dhcp.@domain[-1].name=immortalwrt.tparts.com"
+uci set "dhcp.@domain[-1].ip=192.168.8.3"
+
+uci add dhcp domain
+uci set "dhcp.@domain[-1].name=portainer.tparts.com"
+uci set "dhcp.@domain[-1].ip=192.168.8.207"
+
+uci add dhcp domain
+uci set "dhcp.@domain[-1].name=alist.tparts.com"
+uci set "dhcp.@domain[-1].ip=192.168.8.207"
+
+uci add dhcp domain
+uci set "dhcp.@domain[-1].name=home.tparts.com"
+uci set "dhcp.@domain[-1].ip=192.168.8.207"
+# 配置域名重定向 结束
+
+# 配置静态IP分配 开始
+uci add dhcp host
+uci set "dhcp.@host[-1].name=leozhang"
+uci set "dhcp.@host[-1].ip=192.168.8.160"
+uci set "dhcp.@host[-1].mac=9A:C6:8A:AA:37:84"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=realme-GT5-Pro"
+uci set "dhcp.@host[-1].ip=192.168.8.186"
+uci set "dhcp.@host[-1].mac=FC:2A:46:A5:1A:DF"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=golf1"
+uci set "dhcp.@host[-1].ip=192.168.8.104"
+uci set "dhcp.@host[-1].mac=2C:CF:67:B6:C2:90"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=MacBookPro"
+uci set "dhcp.@host[-1].ip=192.168.8.193"
+uci set "dhcp.@host[-1].mac=46:98:3C:11:1B:76"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=leozhanndiannao"
+uci set "dhcp.@host[-1].ip=192.168.8.112"
+uci set "dhcp.@host[-1].mac=84:21:41:F1:23:00"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=liangyaru"
+uci set "dhcp.@host[-1].ip=192.168.8.123"
+uci add_list "dhcp.@host[-1].mac=4C:ED:FB:6B:62:E2"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=liangcuicui"
+uci set "dhcp.@host[-1].ip=192.168.8.177"
+uci add_list "dhcp.@host[-1].mac=D4:5D:64:47:6E:E7"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=slim"
+uci set "dhcp.@host[-1].ip=192.168.8.231"
+uci add_list "dhcp.@host[-1].mac=D8:BB:C1:54:78:60"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=laishihui"
+uci set "dhcp.@host[-1].ip=192.168.8.120"
+uci add_list "dhcp.@host[-1].mac=E8:9C:25:36:C6:E5"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=liuxuan"
+uci set "dhcp.@host[-1].ip=192.168.8.162"
+uci add_list "dhcp.@host[-1].mac=58:11:22:19:13:b1"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=zhangyingmei"
+uci set "dhcp.@host[-1].ip=192.168.8.206"
+uci add_list "dhcp.@host[-1].mac=58:11:22:0C:F4:0B"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=chenliu"
+uci set "dhcp.@host[-1].ip=192.168.8.142"
+uci add_list "dhcp.@host[-1].mac=2C:F0:5D:DA:82:0F"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=DESKTOP-83N4A2Rjunna"
+uci set "dhcp.@host[-1].ip=192.168.8.127"
+uci set "dhcp.@host[-1].mac=D8:BB:C1:A2:9F:71"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=DESKTOP-1EQCR82mandy"
+uci set "dhcp.@host[-1].ip=192.168.8.143"
+uci set "dhcp.@host[-1].mac=D8:BB:C1:C7:74:03"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=luo"
+uci set "dhcp.@host[-1].ip=192.168.8.220"
+uci set "dhcp.@host[-1].mac=FE:23:56:D4:C5:0B"
+uci add_list "dhcp.@host[-1].tag=proxy"
+
+
+uci add dhcp host
+uci set "dhcp.@host[-1].name=DESKTOP-AOS0BVJjiamin"
+uci set "dhcp.@host[-1].ip=192.168.8.156"
+uci set "dhcp.@host[-1].mac=08:BF:B8:3E:7A:0D"
+
+# 配置静态IP分配 结束
+
 
 # 检查配置文件pppoe-settings是否存在 该文件由build.sh动态生成
 SETTINGS_FILE="/etc/config/pppoe-settings"
